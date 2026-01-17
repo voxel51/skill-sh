@@ -58,13 +58,13 @@ step() {
 
 header() {
   printf "\n"
-  printf "%s███████╗██╗  ██╗██╗██╗     ██╗        ███████╗██╗  ██╗%s\n" "$ORANGE" "$RESET"
-  printf "%s██╔════╝██║ ██╔╝██║██║     ██║        ██╔════╝██║  ██║%s\n" "$ORANGE" "$RESET"
-  printf "%s███████╗█████╔╝ ██║██║     ██║        ███████╗███████║%s\n" "$ORANGE" "$RESET"
-  printf "%s╚════██║██╔═██╗ ██║██║     ██║        ╚════██║██╔══██║%s\n" "$ORANGE" "$RESET"
-  printf "%s███████║██║  ██╗██║███████╗███████╗██╗███████║██║  ██║%s\n" "$ORANGE" "$RESET"
-  printf "%s╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝%s\n" "$ORANGE" "$RESET"
-  printf "%sPowered by Voxel51%s\n" "$DIM" "$RESET"
+  printf "%s          ███████╗██╗  ██╗██╗██╗     ██╗        ███████╗██╗  ██╗%s\n" "$ORANGE" "$RESET"
+  printf "%s          ██╔════╝██║ ██╔╝██║██║     ██║        ██╔════╝██║  ██║%s\n" "$ORANGE" "$RESET"
+  printf "%s          ███████╗█████╔╝ ██║██║     ██║        ███████╗███████║%s\n" "$ORANGE" "$RESET"
+  printf "%s          ╚════██║██╔═██╗ ██║██║     ██║        ╚════██║██╔══██║%s\n" "$ORANGE" "$RESET"
+  printf "%s          ███████║██║  ██╗██║███████╗███████╗██╗███████║██║  ██║%s\n" "$ORANGE" "$RESET"
+  printf "%s          ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝%s\n" "$ORANGE" "$RESET"
+  printf "%s                            Powered by Voxel51%s\n" "$DIM" "$RESET"
   printf "\n"
 }
 
