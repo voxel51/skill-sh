@@ -21,7 +21,7 @@ Powered by [Voxel51](https://voxel51.com)
 ## Quick Start
 
 ```bash
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- voxel51/fiftyone-skills
+curl -sL skil.sh | sh -s -- voxel51/fiftyone-skills
 ```
 
 No Node. No Python. Just `curl`, `git`, and `sh`.
@@ -30,19 +30,19 @@ No Node. No Python. Just `curl`, `git`, and `sh`.
 
 ```bash
 # Install skills (interactive)
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- owner/repo
+curl -sL skil.sh | sh -s -- owner/repo
 
 # List available skills
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- owner/repo --list
+curl -sL skil.sh | sh -s -- owner/repo --list
 
 # List installed skills
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- --installed
+curl -sL skil.sh | sh -s -- --installed
 
 # Install specific skill globally
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- owner/repo -s skill-name -g
+curl -sL skil.sh | sh -s -- owner/repo -s skill-name -g
 
 # Non-interactive (CI/CD)
-curl -sL https://raw.githubusercontent.com/voxel51/skill-sh/main/install.sh | sh -s -- owner/repo -y -g -a claude-code
+curl -sL skil.sh | sh -s -- owner/repo -y -g -a claude-code
 ```
 
 ## Options
