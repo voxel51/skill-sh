@@ -147,16 +147,24 @@ get_install_path() {
 update_cursorrules() {
   skill_path="$1"
   cursorrules_file="$(pwd)/.cursorrules"
-  relative_path=$(echo "$skill_path" | sed "s|$(pwd)/||")
+  relative_path="${skill_path#$(pwd)/}"
   skill_md_path="$relative_path/SKILL.md"
 
   if [ -f "$cursorrules_file" ]; then
-    grep -q "$skill_md_path" "$cursorrules_file" 2>/dev/null && return
+    grep -Fq "$skill_md_path" "$cursorrules_file" 2>/dev/null && return
 
-    if grep -q "^# Skills" "$cursorrules_file" 2>/dev/null; then
+    if grep -q "^When relevant, follow the conventions in these skill files:" "$cursorrules_file" 2>/dev/null; then
       sed -i.bak "/^When relevant, follow the conventions in these skill files:/a\\
 - $skill_md_path" "$cursorrules_file" 2>/dev/null || \
       sed -i '' "/^When relevant, follow the conventions in these skill files:/a\\
+- $skill_md_path" "$cursorrules_file"
+      rm -f "$cursorrules_file.bak" 2>/dev/null
+    elif grep -q "^# Skills" "$cursorrules_file" 2>/dev/null; then
+      sed -i.bak "/^# Skills/a\\
+When relevant, follow the conventions in these skill files:\\
+- $skill_md_path" "$cursorrules_file" 2>/dev/null || \
+      sed -i '' "/^# Skills/a\\
+When relevant, follow the conventions in these skill files:\\
 - $skill_md_path" "$cursorrules_file"
       rm -f "$cursorrules_file.bak" 2>/dev/null
     else
