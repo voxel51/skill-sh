@@ -141,6 +141,43 @@ get_install_path() {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Cursor .cursorrules integration
+# ─────────────────────────────────────────────────────────────────────────────
+
+update_cursorrules() {
+  skill_path="$1"
+  cursorrules_file="$(pwd)/.cursorrules"
+  relative_path="${skill_path#$(pwd)/}"
+  skill_md_path="$relative_path/SKILL.md"
+
+  if [ -f "$cursorrules_file" ]; then
+    grep -Fq "$skill_md_path" "$cursorrules_file" 2>/dev/null && return
+
+    if grep -q "^When relevant, follow the conventions in these skill files:" "$cursorrules_file" 2>/dev/null; then
+      sed -i.bak "/^When relevant, follow the conventions in these skill files:/a\\
+- $skill_md_path" "$cursorrules_file" 2>/dev/null || \
+      sed -i '' "/^When relevant, follow the conventions in these skill files:/a\\
+- $skill_md_path" "$cursorrules_file"
+      rm -f "$cursorrules_file.bak" 2>/dev/null
+    elif grep -q "^# Skills" "$cursorrules_file" 2>/dev/null; then
+      sed -i.bak "/^# Skills/a\\
+When relevant, follow the conventions in these skill files:\\
+- $skill_md_path" "$cursorrules_file" 2>/dev/null || \
+      sed -i '' "/^# Skills/a\\
+When relevant, follow the conventions in these skill files:\\
+- $skill_md_path" "$cursorrules_file"
+      rm -f "$cursorrules_file.bak" 2>/dev/null
+    else
+      printf "\n# Skills\nWhen relevant, follow the conventions in these skill files:\n- %s\n" "$skill_md_path" >> "$cursorrules_file"
+    fi
+  else
+    printf "# Skills\nWhen relevant, follow the conventions in these skill files:\n- %s\n" "$skill_md_path" > "$cursorrules_file"
+  fi
+
+  printf "    %s→ Updated .cursorrules%s\n" "$DIM" "$RESET"
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Parse source URL
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -610,6 +647,10 @@ $match"
         rm -f "$install_path/README.md" "$install_path/metadata.json" 2>/dev/null
         printf "  %s✓%s %s → %s\n" "$GREEN" "$RESET" "$name" "$display"
         printf "    %s%s%s\n" "$DIM" "$install_path" "$RESET"
+
+        if [ "$agent" = "cursor" ] && [ "$GLOBAL" = "0" ]; then
+          update_cursorrules "$install_path"
+        fi
       else
         printf "  %s✗%s %s → %s\n" "$RED" "$RESET" "$name" "$display"
       fi
